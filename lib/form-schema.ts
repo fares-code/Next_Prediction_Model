@@ -16,7 +16,7 @@ export const healthFormSchema = z.object({
   NoDocbcCost: z.enum(["1", "0"]),
   DiffWalk: z.enum(["1", "0"]),
   Sex: z.enum(["0", "1"]),
-  Age: z.number().min(1).max(13),
+  Age: z.enum(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13"]),
   Education: z.enum(["1", "2", "3", "4", "5"]),
   Income: z.enum(["1", "2", "3", "4", "5"]),
   GenHlth: z.enum(["1", "2", "3", "4", "5"]),

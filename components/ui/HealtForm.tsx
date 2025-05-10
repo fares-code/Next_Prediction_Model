@@ -64,7 +64,7 @@ export default function HealthForm() {
       NoDocbcCost: "0",
       DiffWalk: "0",
       Sex: "1", // Male by default
-      Age: 30, // Adjusted default value for age to 30-34
+      Age: 3, // Adjusted default value for age to 30-34
       Education: "3", // Primary School by default
       Income: "3", // Adjusted default value for income to 15k-20k
       GenHlth: "3", // Good by default
@@ -74,7 +74,7 @@ export default function HealthForm() {
   });
 
   async function onSubmit(data: HealthFormType) {
-    // ترتيب البيانات بالشكل المطلوب
+    
     const orderedData = {
       HighBP: data.HighBP,
       HighChol: data.HighChol,
@@ -155,14 +155,29 @@ export default function HealthForm() {
                           onValueChange={field.onChange}
                           className="flex flex-wrap gap-4"
                         >
-                          <div className="flex items-center gap-2">
-                            <RadioGroupItem value="1" id={`${key}-yes`} />
-                            <label htmlFor={`${key}-yes`} className="text-sm md:text-base">Yes</label>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <RadioGroupItem value="0" id={`${key}-no`} />
-                            <label htmlFor={`${key}-no`} className="text-sm md:text-base">No</label>
-                          </div>
+                          {key === "Sex" ? (
+                            <>
+                              <div className="flex items-center gap-2">
+                                <RadioGroupItem value="1" id={`${key}-male`} />
+                                <label htmlFor={`${key}-male`} className="text-sm md:text-base">Male</label>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <RadioGroupItem value="0" id={`${key}-female`} />
+                                <label htmlFor={`${key}-female`} className="text-sm md:text-base">Female</label>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className="flex items-center gap-2">
+                                <RadioGroupItem value="1" id={`${key}-yes`} />
+                                <label htmlFor={`${key}-yes`} className="text-sm md:text-base">Yes</label>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <RadioGroupItem value="0" id={`${key}-no`} />
+                                <label htmlFor={`${key}-no`} className="text-sm md:text-base">No</label>
+                              </div>
+                            </>
+                          )}
                         </RadioGroup>
                       </FormControl>
                       <FormMessage />
@@ -184,7 +199,7 @@ export default function HealthForm() {
                       <FormControl>
                         <RadioGroup
                           defaultValue={String(field.value)}
-                          onValueChange={field.onChange}
+                          onValueChange={(value) => field.onChange(Number(value))}
                           className="flex gap-4 flex-wrap"
                         >
                           {key === "GenHlth" && (
@@ -211,42 +226,63 @@ export default function HealthForm() {
                               </div>
                             </>
                           )}
-                          {key === "Age" && (
-                            <>
-                              <div className="flex items-center gap-2">
-                                <RadioGroupItem value="1" id="age-18-24" />
-                                <label htmlFor="age-18-24" className="text-sm md:text-base">18-24</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <RadioGroupItem value="2" id="age-25-29" />
-                                <label htmlFor="age-25-29" className="text-sm md:text-base">25-29</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <RadioGroupItem value="3" id="age-30-34" />
-                                <label htmlFor="age-30-34" className="text-sm md:text-base">30-34</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <RadioGroupItem value="4" id="age-35-39" />
-                                <label htmlFor="age-35-39" className="text-sm md:text-base">35-39</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <RadioGroupItem value="5" id="age-40-44" />
-                                <label htmlFor="age-40-44" className="text-sm md:text-base">40-44</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <RadioGroupItem value="6" id="age-45-49" />
-                                <label htmlFor="age-45-49" className="text-sm md:text-base">45-49</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <RadioGroupItem value="7" id="age-50-54" />
-                                <label htmlFor="age-50-54" className="text-sm md:text-base">50-54</label>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <RadioGroupItem value="8" id="age-55-59" />
-                                <label htmlFor="age-55-59" className="text-sm md:text-base">55-59</label>
-                              </div>
-                            </>
-                          )}
+                         {key === "Age" && (
+  <>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="1" id="age-18-24" defaultChecked />
+      <label htmlFor="age-18-24" className="text-sm md:text-base">18-24</label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="2" id="age-25-29" />
+      <label htmlFor="age-25-29" className="text-sm md:text-base">25-29</label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="3" id="age-30-34" />
+      <label htmlFor="age-30-34" className="text-sm md:text-base">30-34</label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="4" id="age-35-39" />
+      <label htmlFor="age-35-39" className="text-sm md:text-base">35-39</label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="5" id="age-40-44" />
+      <label htmlFor="age-40-44" className="text-sm md:text-base">40-44</label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="6" id="age-45-49" />
+      <label htmlFor="age-45-49" className="text-sm md:text-base">45-49</label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="7" id="age-50-54" />
+      <label htmlFor="age-50-54" className="text-sm md:text-base">50-54</label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="8" id="age-55-59" />
+      <label htmlFor="age-55-59" className="text-sm md:text-base">55-59</label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="9" id="age-60-64" />
+      <label htmlFor="age-60-64" className="text-sm md:text-base">60-64</label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="10" id="age-65-69" />
+      <label htmlFor="age-65-69" className="text-sm md:text-base">65-69</label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="11" id="age-70-74" />
+      <label htmlFor="age-70-74" className="text-sm md:text-base">70-74</label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="12" id="age-75-79" />
+      <label htmlFor="age-75-79" className="text-sm md:text-base">75-79</label>
+    </div>
+    <div className="flex items-center gap-2">
+      <RadioGroupItem value="13" id="age-80-plus" />
+      <label htmlFor="age-80-plus" className="text-sm md:text-base">80 or Higher</label>
+    </div>
+  </>
+)}
+
                           {key === "Education" && (
                             <>
                               <div className="flex items-center gap-2">
@@ -312,7 +348,7 @@ export default function HealthForm() {
         </form>
       </Form>
       {error && <div className="mt-4 text-red-600">{error}</div>}
-      {prediction && <div className="mt-4 text-green-600"> the Predction is : {prediction === "1" ? "Yes may have diabetes " : "No  you may not have diabetes healthy"} </div>}
+      {prediction && <div className="mt-4 text-green-600 font-extrabold bg-secondary shadow-2xl rounded-2xl w-full uppercase p-5 m-3.5" > The Predction : {prediction === "1" ? "Yes may have diabetes " : "you may not have diabetes (healthy)"} </div>}
     </>
   );
 }
